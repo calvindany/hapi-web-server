@@ -13,9 +13,7 @@ const addNoteHandler = (request, h) => {
 
     notes.push(newNote);
 
-    const isSuccess = notes.filter( (note) => {
-        note.id === id
-    }).length > 0;
+    const isSuccess = notes.filter( (note) => note.id === id).length > 0;
 
     if(isSuccess) {
         const response = h.response({
@@ -27,14 +25,14 @@ const addNoteHandler = (request, h) => {
         });
         response.code(201);
         return response;
-    } else {
-        const response = h.response({
-            status: 'fail',
-            message: 'Catatan gagal ditambahkan',
-        });
-        response.code(500);
-        return response;
     }
+    
+    const response = h.response({
+        status: 'fail',
+        message: 'Catatan gagal ditambahkan',
+    });
+    response.code(500);
+    return response;
 };
 
 module.exports = {addNoteHandler};
